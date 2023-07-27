@@ -34,8 +34,6 @@ interface ExpandedItemProps extends DataHeader {
   cardContainerStyle?: ViewStyle;
 }
 
-//transition for expanded item
-
 export const ExpandedItem: React.FC<ExpandedItemProps> = props => {
   const [isExpanded, setIsExpanded] = React.useState<boolean>(
     props.data.length > 0,

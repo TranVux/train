@@ -1,8 +1,14 @@
-import {StyleSheet, Text, View, ViewStyle} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+  Modal,
+  Pressable,
+} from 'react-native';
 import React from 'react';
 import {scale} from 'react-native-size-matters';
 import {Calendar, LocaleConfig} from 'react-native-calendars';
-import Dialog from 'react-native-dialog';
 
 import {primary} from '@theme/colors';
 import {CalendarIcon} from '@assets/icons';
@@ -117,8 +123,7 @@ export const Analysis: React.FC<AnalysisPropsItem> = props => {
           })}
         </View>
       </View>
-      <Dialog.Container visible={dialogVisible} onBackdropPress={handleCancel}>
-        <Calendar
+      {/* <Calendar
           style={{}}
           onDayPress={day => {
             setCurrentMonth(day.month.toString());
@@ -135,8 +140,50 @@ export const Analysis: React.FC<AnalysisPropsItem> = props => {
             todayBackgroundColor: primary.blue,
             todayTextColor: primary.white,
           }}
-        />
-      </Dialog.Container>
+        /> */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={dialogVisible}
+        onRequestClose={() => {
+          setDialogVisible(false);
+        }}>
+        <Pressable
+          onPress={handleCancel}
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#00000061',
+          }}>
+          <View
+            style={{
+              padding: scale(10),
+              backgroundColor: '#fff',
+              elevation: 10,
+              borderRadius: 10,
+            }}>
+            <Calendar
+              style={{}}
+              onDayPress={day => {
+                setCurrentMonth(day.month.toString());
+                handleCancel();
+              }}
+              markedDates={{
+                [currentMonth]: {
+                  selected: true,
+                  disableTouchEvent: true,
+                },
+              }}
+              theme={{
+                arrowColor: primary.blue,
+                todayBackgroundColor: primary.blue,
+                todayTextColor: primary.white,
+              }}
+            />
+          </View>
+        </Pressable>
+      </Modal>
     </View>
   );
 };
