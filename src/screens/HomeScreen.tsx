@@ -1,21 +1,21 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 import {scale} from 'react-native-size-matters';
 
 import {BellIcon, UserIcon} from '@assets/icons';
 import {primary} from '@theme/colors';
 import {text500, text700} from '@theme/typography';
 import {TabNavigationScreen} from './TabNavigationScreen';
+import {LinearGradientApp} from '@components';
 
 export const HomeScreen: React.FC = () => {
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <View style={{backgroundColor: '#EFF5FF', flexGrow: 1}}>
         <View style={{position: 'relative'}}>
-          <LinearGradient
-            style={styles.headerBackground}
+          <LinearGradientApp
             colors={['#0055D4', '#0082E9']}
+            containerStyle={styles.headerBackground}
           />
           <View style={styles.headerContainer}>
             <View style={styles.avatarContainer}>

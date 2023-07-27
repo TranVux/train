@@ -5,3 +5,4 @@ export * from './DonutChart';
 export * from './ExpandedItem';
 export * from './MaterialTopTabApp';
 export * from './RenderIcon';
+export * from './LinearGradientApp';

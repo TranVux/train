@@ -5,7 +5,7 @@ import {scale} from 'react-native-size-matters';
 
 import {primary} from '@theme/colors';
 import {text700} from '@theme/typography';
-import LinearGradient from 'react-native-linear-gradient';
+import {LinearGradientApp} from './LinearGradientApp';
 
 export const MaterialTopTabApp: FC<MaterialTopTabBarProps> = props => {
   const listRef = React.useRef<FlatList>(null);
@@ -81,8 +81,8 @@ export const MaterialTopTabApp: FC<MaterialTopTabBarProps> = props => {
         justifyContent: 'center',
         backgroundColor: 'transparent',
       }}>
-      <LinearGradient
-        style={styles.headerBackground}
+      <LinearGradientApp
+        containerStyle={styles.headerBackground}
         colors={['#0082E9', '#00B2FF']}
       />
       <FlatList
@@ -115,5 +115,6 @@ const styles = StyleSheet.create({
     left: 0,
     borderBottomRightRadius: scale(75),
     borderBottomLeftRadius: scale(75),
+    overflow: 'hidden',
   },
 });
