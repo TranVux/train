@@ -1,58 +1,44 @@
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
-import {BellIcon, UserIcon} from '../assets/svgs';
 import {scale} from 'react-native-size-matters';
-import TabNavigationScreen from './TabNavigationScreen';
 
-const HomeScreen: React.FC = () => {
+import {BellIcon, UserIcon} from '@assets/svgs';
+import {primary} from '@theme/colors';
+import {text500, text700} from '@theme/typography';
+import {TabNavigationScreen} from './TabNavigationScreen';
+
+export const HomeScreen: React.FC = () => {
   return (
-    <View style={{flex: 1}}>
-      <StatusBar backgroundColor="#0055D4" />
-      <View style={{flex: 1}}>
-        <View style={{position: 'relative'}}>
-          <LinearGradient
-            style={styles.headerBackground}
-            colors={['#0055D4', '#0082E9']}
-          />
-          <View style={styles.headerContainer}>
-            <View style={styles.avatarContainer}>
-              <UserIcon />
-            </View>
-            <View style={styles.userInfo}>
-              <Text
-                style={{color: '#fff', fontSize: scale(14), fontWeight: '300'}}>
-                Xin Chào
-              </Text>
-              <Text
-                style={{color: '#fff', fontSize: scale(20), fontWeight: '400'}}>
-                Kathryn Murphy
-              </Text>
-            </View>
-            <BellIcon />
+    <View style={{backgroundColor: '#EFF5FF', flex: 1}}>
+      <View style={{position: 'relative'}}>
+        <LinearGradient
+          style={styles.headerBackground}
+          colors={['#0055D4', '#0082E9']}
+        />
+        <View style={styles.headerContainer}>
+          <View style={styles.avatarContainer}>
+            <UserIcon />
           </View>
+          <View style={styles.userInfo}>
+            <Text
+              style={[{color: primary.white, fontSize: scale(14)}, text500]}>
+              Xin Chào
+            </Text>
+            <Text
+              style={[{color: primary.white, fontSize: scale(20)}, text700]}>
+              Kathryn Murphy
+            </Text>
+          </View>
+          <BellIcon />
         </View>
-        {/* <ScrollView
-          bounces={false}
-          alwaysBounceVertical={false}
-          style={{flex: 1}}
-          showsVerticalScrollIndicator={false}> */}
-        <TabNavigationScreen />
-        {/* </ScrollView> */}
       </View>
+
+      {/* top top layout */}
+      <TabNavigationScreen />
     </View>
   );
 };
-
-export default HomeScreen;
 
 const styles = StyleSheet.create({
   headerBackground: {

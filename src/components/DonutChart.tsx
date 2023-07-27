@@ -3,6 +3,8 @@ import {View, StyleSheet, Text} from 'react-native';
 import {scale} from 'react-native-size-matters';
 import Svg, {G, Circle} from 'react-native-svg';
 
+import {text600, text700} from '@theme/typography';
+
 interface DonutChartProps {
   series: number[];
   titles: string[];
@@ -17,7 +19,7 @@ interface DonutChartProp {
   color: string;
 }
 
-const DonutChart: React.FC<DonutChartProps> = props => {
+export const DonutChart: React.FC<DonutChartProps> = props => {
   const [chartValue, setChartValue] = React.useState<DonutChartProp[]>([]);
   const [totalValue, setTotalValue] = React.useState<number>(0);
   const [startAngle, setStartAngle] = React.useState<number[]>([]);
@@ -99,19 +101,36 @@ const DonutChart: React.FC<DonutChartProps> = props => {
               })}
           </G>
         </Svg>
-        <View style={{position: 'absolute', alignItems: 'center'}}>
-          <Text style={{fontSize: scale(10), color: '#000'}}>Doanh thu</Text>
-          <Text style={{fontSize: scale(32), color: '#000', fontWeight: '700'}}>
+        <View
+          style={{
+            position: 'absolute',
+            alignItems: 'center',
+          }}>
+          <Text
+            style={{
+              fontSize: scale(10),
+              color: '#000',
+              ...text600,
+            }}>
+            Doanh thu
+          </Text>
+          <Text
+            style={{
+              fontSize: scale(32),
+              color: '#000',
+              lineHeight: scale(38),
+              ...text700,
+            }}>
             70tr
           </Text>
-          <Text style={{fontSize: scale(10), color: '#000'}}>Tăng 30%</Text>
+          <Text style={{fontSize: scale(10), color: '#000', ...text600}}>
+            Tăng 30%
+          </Text>
         </View>
       </View>
     </View>
   );
 };
-
-export default DonutChart;
 
 const styles = StyleSheet.create({
   container: {
@@ -120,12 +139,5 @@ const styles = StyleSheet.create({
   graphWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  text: {
-    position: 'absolute',
-    textAlign: 'center',
-    fontWeight: '600',
-    fontSize: 18,
-    color: '#394867',
   },
 });

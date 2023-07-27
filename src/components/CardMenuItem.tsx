@@ -2,6 +2,8 @@ import {StyleSheet, Text, View, ViewStyle} from 'react-native';
 import React from 'react';
 import {scale} from 'react-native-size-matters';
 
+import {text600, text700} from '@theme/typography';
+
 export interface CardMenuItemProps {
   avatar: any;
   title: string;
@@ -16,7 +18,7 @@ export const WIDTH_CHILD_ITEM_EXPANDED = scale(112);
 export const HEIGHT_CHILD_ITEM_EXPANDED = scale(140);
 export const DEFAULT_MARGIN_ITEM = scale(8);
 
-const CardMenuItem: React.FC<CardMenuItemProps> = props => {
+export const CardMenuItem: React.FC<CardMenuItemProps> = props => {
   // console.log(props);
   return (
     <View
@@ -37,8 +39,6 @@ const CardMenuItem: React.FC<CardMenuItemProps> = props => {
     </View>
   );
 };
-
-export default CardMenuItem;
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   mainTitle: {
     fontSize: scale(12),
-    fontWeight: '700',
+    ...text700,
     color: '#000',
     textTransform: 'capitalize',
   },
@@ -77,11 +77,11 @@ const styles = StyleSheet.create({
   subTitle: {
     marginBottom: scale(4),
     color: '#000',
-    fontWeight: '600',
+    ...text600,
   },
   status: {
     color: '#000000',
     fontSize: scale(10),
-    fontWeight: '700',
+    ...text700,
   },
 });

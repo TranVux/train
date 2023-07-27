@@ -1,9 +1,9 @@
 export const bottomTabRoutes = {
-  home: 'HOME_SCREEN',
-  chat: 'CHAT_SCREEN',
-  manage: 'MANAGE_SCREEN',
-  news: 'NEWS_SCREEN',
-  setting: 'SETTING_SCREEN',
+  home: 'Trang chủ',
+  chat: 'Trò truyện',
+  manage: 'Quản lý',
+  news: 'Tin túc',
+  setting: 'Cài đặt',
 };
 
 export const topTabRoutes = {

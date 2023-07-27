@@ -8,12 +8,6 @@ import {
 } from 'react-native';
 import React from 'react';
 import {scale} from 'react-native-size-matters';
-import {ArrowDown} from '../assets/svgs';
-import {DataHeader} from '../assets/mock/data';
-import CardMenuItem, {
-  DEFAULT_MARGIN_ITEM,
-  WIDTH_CHILD_ITEM_EXPANDED,
-} from './CardMenuItem';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -23,15 +17,26 @@ import Animated, {
   LinearTransition,
 } from 'react-native-reanimated';
 
+import {
+  CardMenuItem,
+  DEFAULT_MARGIN_ITEM,
+  WIDTH_CHILD_ITEM_EXPANDED,
+} from './CardMenuItem';
+
+import {DataHeader} from '@assets/mock/data';
+import {ArrowDown} from '@assets/svgs';
+import {text700} from '@theme/typography';
+
 export const AMOUNT_ITEM_OF_ROW = 4;
 
 interface ExpandedItemProps extends DataHeader {
   styles?: ViewStyle;
+  cardContainerStyle?: ViewStyle;
 }
 
 //transition for expanded item
 
-const ExpandedItem: React.FC<ExpandedItemProps> = props => {
+export const ExpandedItem: React.FC<ExpandedItemProps> = props => {
   const [isExpanded, setIsExpanded] = React.useState<boolean>(
     props.data.length > 0,
   );
@@ -65,26 +70,36 @@ const ExpandedItem: React.FC<ExpandedItemProps> = props => {
   return (
     <Animated.View
       layout={LinearTransition.duration(200)}
-      style={[{flex: 1}, {...props.styles}]}>
+      style={[{flexGrow: 1}, {...props?.styles}]}>
+      {/* Header expanded item */}
       <Pressable style={styles.header} onPress={onTitlePress}>
         <Text style={styles.headerText}>{props.title}</Text>
         <Animated.View style={[arrowRotationStyle]}>
           <ArrowDown fill={'#000'} />
         </Animated.View>
       </Pressable>
-      <View>
+
+      {/* card item */}
+      <View style={{flex: 1}}>
         {isExpanded && (
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView
+            contentContainerStyle={{flexGrow: 1}}
+            horizontal
+            showsHorizontalScrollIndicator={false}>
             <View
-              // layout={LinearTransition}
-              style={{
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                width: 'auto',
-                maxWidth:
-                  AMOUNT_ITEM_OF_ROW *
-                  (WIDTH_CHILD_ITEM_EXPANDED + DEFAULT_MARGIN_ITEM + scale(10)),
-              }}>
+              style={[
+                {
+                  flex: 1,
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  maxWidth:
+                    AMOUNT_ITEM_OF_ROW *
+                    (WIDTH_CHILD_ITEM_EXPANDED +
+                      DEFAULT_MARGIN_ITEM +
+                      scale(2)),
+                },
+                {...props?.cardContainerStyle},
+              ]}>
               {props.data.map((item, index) => {
                 return <CardMenuItem key={'itemCard' + index} {...item} />;
               })}
@@ -96,8 +111,6 @@ const ExpandedItem: React.FC<ExpandedItemProps> = props => {
   );
 };
 
-export default ExpandedItem;
-
 const styles = StyleSheet.create({
   header: {
     width: '100%',
@@ -105,12 +118,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: scale(12),
+    paddingHorizontal: scale(27),
   },
   headerText: {
     fontSize: scale(20),
     color: '#000',
-    fontWeight: '700',
     flex: 1,
     textTransform: 'capitalize',
+    ...text700,
   },
 });

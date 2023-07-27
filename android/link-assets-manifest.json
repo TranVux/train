@@ -1,0 +1,21 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/bold.ttf",
+      "sha1": "fd799b6fb4aff1a9402e071ab02d1ddea731b868"
+    },
+    {
+      "path": "src/assets/fonts/extrabold.ttf",
+      "sha1": "1c92715c134738f2956bf758181522243c7586dd"
+    },
+    {
+      "path": "src/assets/fonts/medium.ttf",
+      "sha1": "9d35f805e98f95e72f5d0a4ced7397584d7349be"
+    },
+    {
+      "path": "src/assets/fonts/semibold.ttf",
+      "sha1": "75f4fca0d4d80e2b9a62d3283261e933786fb8c1"
+    }
+  ]
+}

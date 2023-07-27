@@ -1,8 +1,11 @@
 import {StyleSheet, Text, View, ViewStyle} from 'react-native';
 import React from 'react';
 import {scale} from 'react-native-size-matters';
-import {CalendarIcon} from '../assets/svgs';
-import DonutChart from './DonutChart';
+
+import {primary} from '@theme/colors';
+import {CalendarIcon} from '@assets/svgs';
+import {DonutChart} from '@components';
+import {text500, text700} from '@theme/typography';
 
 interface AnalysisPropsItem {
   titles: string[];
@@ -11,13 +14,13 @@ interface AnalysisPropsItem {
   containerStyle?: ViewStyle;
 }
 
-const Analysis: React.FC<AnalysisPropsItem> = props => {
+export const Analysis: React.FC<AnalysisPropsItem> = props => {
   return (
     <View
       style={[
         {
-          backgroundColor: 'white',
-          padding: scale(20),
+          backgroundColor: primary.white,
+          padding: scale(15),
         },
         {...props.containerStyle},
       ]}>
@@ -28,7 +31,7 @@ const Analysis: React.FC<AnalysisPropsItem> = props => {
       <View style={styles.mainContainer}>
         <DonutChart
           size={scale(124)}
-          strokeWidth={scale(18)}
+          strokeWidth={scale(16)}
           colors={props.colors}
           series={props.series}
           titles={props.titles}
@@ -58,8 +61,8 @@ const Analysis: React.FC<AnalysisPropsItem> = props => {
                     styles.baseTextStyle,
                     {
                       marginStart: 5,
-                      fontWeight: '700',
                     },
+                    text700,
                   ]}>
                   {props.series[index]}%
                 </Text>
@@ -72,8 +75,6 @@ const Analysis: React.FC<AnalysisPropsItem> = props => {
   );
 };
 
-export default Analysis;
-
 const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
@@ -85,17 +86,18 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: scale(20),
     lineHeight: 28,
-    fontWeight: '700',
     textTransform: 'capitalize',
+    ...text700,
   },
   mainContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: scale(8),
+    marginTop: scale(14),
   },
   baseTextStyle: {
     color: '#000',
     fontSize: scale(12),
+    ...text500,
   },
 });
