@@ -24,7 +24,7 @@ import {
 } from './CardMenuItem';
 
 import {DataHeader} from '@assets/mock/data';
-import {ArrowDown} from '@assets/svgs';
+import {ArrowDown} from '@assets/icons';
 import {text700} from '@theme/typography';
 
 export const AMOUNT_ITEM_OF_ROW = 4;
@@ -80,7 +80,7 @@ export const ExpandedItem: React.FC<ExpandedItemProps> = props => {
       </Pressable>
 
       {/* card item */}
-      <View style={{flex: 1}}>
+      <View style={{flexGrow: 1}}>
         {isExpanded && (
           <ScrollView
             contentContainerStyle={{flexGrow: 1}}

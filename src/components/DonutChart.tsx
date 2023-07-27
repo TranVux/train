@@ -27,19 +27,19 @@ export const DonutChart: React.FC<DonutChartProps> = props => {
   const radius = (props.size - props.strokeWidth) / 2;
   const circleCircumference = 2 * Math.PI * radius;
 
-  const _setUpChartValue = (prop: DonutChartProps) => {
+  const setUpChartValue = (prop: DonutChartProps) => {
     //setup data of chart
-    const _tempValueChartList = prop.colors.map((color, index) => {
+    const tempValueChartList = prop.colors.map((color, index) => {
       return {
         color: color,
         title: prop.titles[index],
         series: prop.series[index],
       };
     });
-    setChartValue(_tempValueChartList);
+    setChartValue(tempValueChartList);
 
     //setup total value of chart
-    let _tempTotalValue = _tempValueChartList.reduce((total, currentValue) => {
+    let _tempTotalValue = tempValueChartList.reduce((total, currentValue) => {
       return total + currentValue.series;
     }, 0);
     setTotalValue(_tempTotalValue / 100);
@@ -48,7 +48,7 @@ export const DonutChart: React.FC<DonutChartProps> = props => {
     let angle = 0;
     let angleList: number[] = [];
 
-    _tempValueChartList.map(item => {
+    tempValueChartList.map(item => {
       angleList.push(angle);
       angle += (item.series / 100) * 360;
     });
@@ -56,7 +56,7 @@ export const DonutChart: React.FC<DonutChartProps> = props => {
   };
 
   React.useEffect(() => {
-    _setUpChartValue(props);
+    setUpChartValue(props);
   }, [props]);
 
   return (
@@ -118,7 +118,8 @@ export const DonutChart: React.FC<DonutChartProps> = props => {
             style={{
               fontSize: scale(32),
               color: '#000',
-              lineHeight: scale(38),
+              lineHeight: scale(32),
+              marginVertical: 3,
               ...text700,
             }}>
             70tr

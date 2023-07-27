@@ -14,8 +14,6 @@ export const NavigationScreen: React.FC = () => {
       tabBar={props => <BottomTabApp {...props} />}
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#0158D6',
-        tabBarInactiveTintColor: '#0000004D',
       }}
       initialRouteName={bottomTabRoutes.home}>
       <BottomTab.Screen name={bottomTabRoutes.home} component={HomeScreen} />

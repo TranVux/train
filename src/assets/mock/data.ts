@@ -16,8 +16,8 @@ import {
   TravelGlobalIcon,
   CreditIcon,
   CardIcon,
-} from '../svgs';
-import {HouseIcon} from '../svgs/House';
+} from '../icons';
+import {HouseIcon} from '../icons/House';
 import {View} from 'react-native';
 import {accent, label} from '@theme/colors';
 export const screenData = {

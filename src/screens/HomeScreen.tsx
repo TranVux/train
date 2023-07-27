@@ -3,40 +3,47 @@ import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {scale} from 'react-native-size-matters';
 
-import {BellIcon, UserIcon} from '@assets/svgs';
+import {BellIcon, UserIcon} from '@assets/icons';
 import {primary} from '@theme/colors';
 import {text500, text700} from '@theme/typography';
 import {TabNavigationScreen} from './TabNavigationScreen';
 
 export const HomeScreen: React.FC = () => {
   return (
-    <View style={{backgroundColor: '#EFF5FF', flex: 1}}>
-      <View style={{position: 'relative'}}>
-        <LinearGradient
-          style={styles.headerBackground}
-          colors={['#0055D4', '#0082E9']}
-        />
-        <View style={styles.headerContainer}>
-          <View style={styles.avatarContainer}>
-            <UserIcon />
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <View style={{backgroundColor: '#EFF5FF', flexGrow: 1}}>
+        <View style={{position: 'relative'}}>
+          <LinearGradient
+            style={styles.headerBackground}
+            colors={['#0055D4', '#0082E9']}
+          />
+          <View style={styles.headerContainer}>
+            <View style={styles.avatarContainer}>
+              <UserIcon />
+            </View>
+            <View style={styles.userInfo}>
+              <Text
+                style={[{color: primary.white, fontSize: scale(14)}, text500]}>
+                Xin Chào
+              </Text>
+              <Text
+                style={[{color: primary.white, fontSize: scale(20)}, text700]}>
+                Kathryn Murphy
+              </Text>
+            </View>
+            <BellIcon />
           </View>
-          <View style={styles.userInfo}>
-            <Text
-              style={[{color: primary.white, fontSize: scale(14)}, text500]}>
-              Xin Chào
-            </Text>
-            <Text
-              style={[{color: primary.white, fontSize: scale(20)}, text700]}>
-              Kathryn Murphy
-            </Text>
-          </View>
-          <BellIcon />
         </View>
-      </View>
 
-      {/* top top layout */}
-      <TabNavigationScreen />
-    </View>
+        {/* top top layout */}
+        <ScrollView
+          scrollEnabled={true}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{flexGrow: 1}}>
+          <TabNavigationScreen />
+        </ScrollView>
+      </View>
+    </ScrollView>
   );
 };
 

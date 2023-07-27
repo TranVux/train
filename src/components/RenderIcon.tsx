@@ -4,7 +4,7 @@ import {
   ManageIcon,
   NewsIcon,
   SettingIcon,
-} from '@assets/svgs';
+} from '@assets/icons';
 
 interface RenderIconProps {
   index: number;

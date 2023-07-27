@@ -8,12 +8,14 @@
       "@theme": ["theme"],
       "@configs": ["configs"],
       "@assets": ["assets"],
-
+      "@utils": ["utils"],
+      
       "@components/*": ["components/*"],
       "@screens/*": ["screens/*"],
       "@theme/*": ["theme/*"],
       "@configs/*": ["configs/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@utils/*": ["utils/*"],
     }, 
   },
 }
