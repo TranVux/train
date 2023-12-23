@@ -1,18 +1,28 @@
 import React, {FC} from 'react';
 import {MaterialTopTabBarProps} from '@react-navigation/material-top-tabs';
-import {Animated, FlatList, Pressable, View, StyleSheet} from 'react-native';
+import {Animated, FlatList, Pressable, View, ScrollView} from 'react-native';
 import {scale} from 'react-native-size-matters';
 
 import {primary} from '@theme/colors';
 import {text700} from '@theme/typography';
-import {LinearGradientApp} from './LinearGradientApp';
+import Indicator from './Indicator';
+
+const ITEM_GAP = 24;
 
 export const MaterialTopTabApp: FC<MaterialTopTabBarProps> = props => {
   const listRef = React.useRef<FlatList>(null);
+  const [tabWidths, setTabWidths] = React.useState<number[]>([]);
+  const [tabPositions, setTabPositions] = React.useState<number[]>([]);
+  const [layoutWidth, setLayoutWidth] = React.useState<number>(0);
 
   const inputRange = React.useMemo(() => {
     return props.state.routes?.map((_, index) => index);
   }, [props.state.routes]);
+
+  React.useEffect(() => {
+    console.log(tabWidths);
+    console.log(tabPositions);
+  }, [tabWidths, tabPositions]);
 
   const _renderItem = ({index, item}: any) => {
     const opacity = props.position.interpolate({
@@ -32,6 +42,26 @@ export const MaterialTopTabApp: FC<MaterialTopTabBarProps> = props => {
 
     return (
       <Pressable
+        onLayout={e => {
+          const currentWidth = e.nativeEvent.layout.width;
+
+          const previousWidths = tabWidths.reduce(
+            (sum, currentValue) => sum + currentValue,
+            0,
+          );
+          console.log('scale 24: ' + scale(ITEM_GAP));
+
+          setTabWidths(prev => [...prev, currentWidth]);
+
+          if (index == 0) {
+            setTabPositions([scale(ITEM_GAP)]);
+          } else {
+            setTabPositions(prev => [
+              ...prev,
+              previousWidths + scale(ITEM_GAP),
+            ]);
+          }
+        }}
         onPress={() => {
           props.navigation.navigate(item.name);
 
@@ -50,6 +80,7 @@ export const MaterialTopTabApp: FC<MaterialTopTabBarProps> = props => {
               color: primary.white,
               opacity,
               textTransform: 'capitalize',
+              backgroundColor: 'red',
             },
             text700,
           ]}>
@@ -57,7 +88,7 @@ export const MaterialTopTabApp: FC<MaterialTopTabBarProps> = props => {
         </Animated.Text>
 
         {/* indicator */}
-        <View style={{paddingHorizontal: scale(20), marginTop: 8}}>
+        {/* <View style={{paddingHorizontal: scale(20), marginTop: 8}}>
           <Animated.View
             style={{
               height: 3,
@@ -68,23 +99,31 @@ export const MaterialTopTabApp: FC<MaterialTopTabBarProps> = props => {
               opacity: indicatorOpacity,
             }}
           />
-        </View>
+        </View> */}
       </Pressable>
     );
   };
 
   return (
-    <View
-      style={{
+    <ScrollView
+      onLayout={e => {
+        setLayoutWidth(e.nativeEvent.layout.width);
+      }}
+      horizontal
+      contentContainerStyle={{
         height: scale(48),
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'transparent',
       }}>
-      <LinearGradientApp
-        containerStyle={styles.headerBackground}
-        colors={['#0082E9', '#00B2FF']}
-      />
+      {tabWidths.length >= props.state.routeNames.length && (
+        <Indicator
+          listTabPosition={tabPositions}
+          layoutWidth={layoutWidth}
+          routes={props.state.routeNames}
+          listTabWidths={tabWidths}
+        />
+      )}
       <FlatList
         scrollEventThrottle={1}
         ref={listRef}
@@ -93,28 +132,16 @@ export const MaterialTopTabApp: FC<MaterialTopTabBarProps> = props => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{
           flexGrow: 1,
-          gap: scale(24),
+          gap: scale(ITEM_GAP),
           alignItems: 'center',
           justifyContent: 'center',
           paddingHorizontal: scale(24),
         }}
+        scrollEnabled={false}
         data={props.state.routes}
         keyExtractor={item => item.key}
         renderItem={_renderItem}
       />
-    </View>
+    </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  headerBackground: {
-    width: '100%',
-    height: scale(120),
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    borderBottomRightRadius: scale(75),
-    borderBottomLeftRadius: scale(75),
-    overflow: 'hidden',
-  },
-});

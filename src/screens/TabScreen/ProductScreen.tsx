@@ -3,7 +3,7 @@ import React from 'react';
 import {scale} from 'react-native-size-matters';
 
 import {menuData} from '@assets/mock/data';
-import {Analysis, ExpandedItem} from '@components';
+import {Analysis, ExpandedItem, LinearGradientApp} from '@components';
 import {accent} from '@theme/colors';
 
 export const ProductScreen: React.FC = () => {
@@ -19,6 +19,10 @@ export const ProductScreen: React.FC = () => {
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <View style={{flexGrow: 1}}>
+          <LinearGradientApp
+            containerStyle={styles.headerBackground}
+            colors={['#0082E9', '#00B2FF']}
+          />
           <Analysis
             containerStyle={styles.analysisContainerStyle}
             colors={[
@@ -66,5 +70,15 @@ const styles = StyleSheet.create({
   analysisContainerStyle: {
     borderRadius: scale(32),
     marginHorizontal: scale(15),
+  },
+  headerBackground: {
+    width: '100%',
+    height: scale(120),
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    borderBottomRightRadius: scale(75),
+    borderBottomLeftRadius: scale(75),
+    overflow: 'hidden',
   },
 });
